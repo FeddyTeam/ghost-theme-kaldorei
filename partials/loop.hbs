@@ -19,26 +19,33 @@
     <article class="{{post_class}}" data-anijs="if: scroll, on: window, do: fadeInDown animated, before: scrollReveal">
         <header class="post-header">
             <h1 class="post-title"><a href="{{url}}">{{{title}}}</a></h1>
+            <section class="post-author">
+                <span class="post-meta-item post-meta-author">
+                    <i class="fa fa-user"></i>
+                    {{author}}
+                </span>
+                <span class="post-meta-item post-meta-date">
+                    <i class="fa fa-clock-o"></i>
+                    <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">{{date timeago="ture"}}</time>
+                    <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">({{date format="YYYY-MM-DD"}})</time>
+                </span>
+                <span class="post-meta-item post-meta-tags">
+                    <i class="fa fa-tag"></i>
+                    {{tags}}
+                </span>
+            </section>
         </header>
         <section class="post-excerpt">
-            <p>{{excerpt words="26"}} ... </p>
+            <p>{{excerpt words="50"}} ... </p>
         </section>
+        {{#if feature_image}}
+        <section class="post-feature_image">
+            <img src="{{feature_image}}" alt="">
+        </section>
+        {{/if}}
         <footer class="post-meta">
-            <span class="post-meta-item post-meta-author">
-                <i class="fa fa-user"></i>
-                {{author}}
-            </span>
-            <span class="post-meta-item post-meta-date">
-                <i class="fa fa-clock-o"></i>
-                <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">{{date timeago="ture"}}</time>
-                <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">({{date format="YYYY-MM-DD"}})</time>
-            </span>
-            <span class="post-meta-item post-meta-tags">
-                <i class="fa fa-tag"></i>
-                {{tags}}
-            </span>
             <span class="post-meta-item pull-right">
-                <a class="read-more" href="{{url}}">阅读全文 <i class="fa fa-angle-double-right"></i></a>
+                <!-- <a class="read-more" href="{{url}}">阅读全文 <i class="fa fa-angle-double-right"></i></a> -->
             </span>
         </footer>
     </article>
@@ -46,4 +53,9 @@
 
     {{! Previous/next page links - displayed on every page }}
     {{pagination}}
+
+
+    {{#is "index,tag"}}
+    {{> "tag_cloud"}}
+    {{/is}}
 </div>
